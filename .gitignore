@@ -1,3 +1,8 @@
+#Files
+example_data_lorencin.csv
+example_data_lorencin.xlsx
+pandas.ipynb
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
