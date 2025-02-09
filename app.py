@@ -17,6 +17,13 @@ if "run_code_clicked" not in st.session_state:
 
 def get_response(messages):
     
+    # Define the system message
+    system_message = {"role": "system", "content": "You are a helpful assistant designed to create charts from the data that is provided to you. You will write Python code that will generate the charts."}
+
+    # Ensure the system message is always the first message
+    if not messages or messages[0]["role"] != "system":
+        messages.insert(0, system_message)
+    
     response = completion(
         model="ollama/llama3.2:1b",
         messages=messages,
