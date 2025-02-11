@@ -55,7 +55,8 @@ st.title("Llama 3.2 1B Chat Demo with Code Execution")
 uploaded_file  = st.file_uploader("Upload a CSV file", type=["csv"])
 if uploaded_file is not None:
     dataframe  = pd.read_csv(uploaded_file)
-
+else:
+    dataframe = None
 
 
 for message in st.session_state.messages:
