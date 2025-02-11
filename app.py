@@ -15,10 +15,14 @@ if "code_output" not in st.session_state:
 if "run_code_clicked" not in st.session_state:
     st.session_state["run_code_clicked"] = False
 
+
 def get_response(messages):
-    
+
     # Define the system message
-    system_message = {"role": "system", "content": "You are an intelligent assistant specialized in data visualization. Your task is to generate Python code that utilizes the Pandas library to process and analyze the provided data, and then create insightful charts and graphs based on that data."}
+    system_message = {
+        "role": "system",
+        "content": "You are an intelligent assistant specialized in data visualization. Your task is to only generate Python code that utilizes the Pandas library to process and analyze the provided data, and then create insightful charts and graphs based on that data. Don't write any comments, only code.",
+    }
 
     # Ensure the system message is always the first message
     if not messages or messages[0]["role"] != "system":
