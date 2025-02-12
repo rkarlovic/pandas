@@ -63,8 +63,9 @@ else:
 
 
 for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
+    if message["role"] != "system":
+        with st.chat_message(message["role"]):    
+            st.markdown(message["content"])
 
 
 if user_input := st.chat_input("Enter your message:"):
