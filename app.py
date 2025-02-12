@@ -21,7 +21,7 @@ def get_response(messages):
     # Define the system message
     system_message = {
         "role": "system",
-        "content": "You are an intelligent assistant specialized in data visualization. Your task is to only generate Python code that utilizes the Pandas library to process and analyze the provided data, and then create insightful charts and graphs based on that data. Don't write any comments, only code.",
+        "content": "You are an intelligent assistant specialized in data visualization. Your task is to only generate Python code that utilizes the Pandas library to process and analyze the provided data, and then create insightful charts and graphs based on that data by using matplotlib library. Don't write any comments, only code. Include all necessary imports for code to work.",
     }
 
     # Ensure the system message is always the first message
