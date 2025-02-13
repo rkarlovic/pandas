@@ -99,4 +99,4 @@ if st.session_state.run_code_clicked:
 
 if st.session_state.code_output:
     st.markdown("### Code Execution Output:")
-    st.text(st.session_state.code_output)    
+    st.text(st.session_state.code_output)
