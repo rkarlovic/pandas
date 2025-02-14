@@ -105,6 +105,8 @@ if st.session_state.run_code_clicked:
     st.session_state.code_output = execute_code(code_to_run)
     st.session_state.run_code_clicked = False
 
-if st.session_state.code_output:
+
+#Do we want to display the code output in case everything is fine?
+if st.session_state.code_output and "Error during execution" in st.session_state.code_output:
     st.markdown("### Code Execution Output:")
     st.text(st.session_state.code_output)
