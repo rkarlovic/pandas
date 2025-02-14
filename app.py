@@ -53,6 +53,14 @@ def execute_code(code):
         return f"Error during execution:\n{traceback.format_exc()}"
 
 
+def extract_code_block(response_content):
+    if "```python" in response_content:
+        return response_content.split("```python")[1].split("```")[0].strip()
+    elif "```" in response_content:
+        return response_content.split("```")[1].split("```")[0].strip()
+    return ""
+
+
 st.title("Llama 3.2 1B Chat Demo with Code Execution")
 
 uploaded_file = st.file_uploader("Upload a CSV file", type=["csv"])
@@ -82,8 +90,8 @@ if user_input := st.chat_input("Enter your message:"):
 
     st.session_state.messages.append({"role": "assistant", "content": response_content})
 
-    if "```python" in response_content:
-        code_block = response_content.split("```python")[1].split("```")[0].strip()
+    if "```" in response_content:
+        code_block = extract_code_block(response_content)
         st.session_state["current_code_block"] = code_block
         st.markdown("### Code returned by the model:")
         st.code(code_block, language="python")
