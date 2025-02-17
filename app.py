@@ -46,8 +46,9 @@ def execute_code(code):
         plt.savefig(buffer, format="png")
         buffer.seek(0)
         plt.close()
-
-        st.image(buffer)
+        if not plt.gca().has_data():
+            st.image(buffer)
+            st.session_state.messages.append({"role": "assistant", "content": buffer})
         return f"Execution Successful. Output: {local_vars.get('result', 'No output variable defined')}"
     except Exception as e:
         return f"Error during execution:\n{traceback.format_exc()}"
@@ -72,8 +73,11 @@ else:
 
 for message in st.session_state.messages:
     if message["role"] != "system":
-        with st.chat_message(message["role"]):    
-            st.markdown(message["content"])
+        with st.chat_message(message["role"]):
+            if isinstance(message["content"], io.BytesIO):
+                st.image(message["content"])
+            else:
+                st.markdown(message["content"])
 
 
 if user_input := st.chat_input("Enter your message:"):
