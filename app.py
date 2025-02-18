@@ -30,7 +30,8 @@ def get_response(messages):
         messages.insert(0, system_message)
 
     response = completion(
-        model="ollama/llama3.2:1b", 
+        # model="ollama/llama3.2:1b"        
+        model="ollama/qwen2.5-coder:7b",
         messages=messages, 
         api_base="http://localhost:11434"
     )
