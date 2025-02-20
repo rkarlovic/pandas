@@ -15,6 +15,9 @@ if "code_output" not in st.session_state:
 if "run_code_clicked" not in st.session_state:
     st.session_state["run_code_clicked"] = False
 
+if "internal_prompt" not in st.session_state:
+    st.session_state["internal_prompt"] = []
+
 
 def get_response(messages):
 
@@ -85,14 +88,16 @@ for message in st.session_state.messages:
 
 if user_input := st.chat_input("Enter your message:"):
     if dataframe is not None:
-        user_input = user_input + " " + str(dataframe)
+        # hide the dataframe from the user
+        internal_prompt = user_input + " " + str(dataframe)
+    st.session_state.internal_prompt.append({"role": "user", "content": internal_prompt})
     st.session_state.messages.append({"role": "user", "content": user_input})
     with st.chat_message("user"):
         st.markdown(user_input)
 
     with st.chat_message("assistant"):
         st.markdown("Bot")
-        response_content = get_response(st.session_state.messages)
+        response_content = get_response(st.session_state.internal_prompt)
         st.markdown(response_content)
 
     st.session_state.messages.append({"role": "assistant", "content": response_content})
